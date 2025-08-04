@@ -1,12 +1,20 @@
-#include <stduio.h>
+#include <iostream>
+#include <string>  // ใช้สำหรับ string
+using namespace std;
 
 int main() {
-    char Name[50] ;
-    int  Age = 0 ;
-    printf( "Enter your name: " ) 
-    scanf( "%s", Name ) ;
-    printf( "Enter your age: " ) ;
-    scanf( "%d", Age ) ;
-    print( "- - - - - -\n" ) ;
-    printf( "Hello %s \n", ___ ) ; 
-    printf( "Age = %d\n", ___ ) ; 
+    string name;
+    int age;
+
+    cout << "Enter your name: ";
+    getline(cin, name);  // รับชื่อทั้งบรรทัด รองรับช่องว่าง
+
+    cout << "Enter your age: ";
+    cin >> age;
+
+    cout << "- - - - - -" << endl;
+    cout << "Hello " << name << endl;
+    cout << "Age = " << age << endl;
+
+    return 0;
+}
