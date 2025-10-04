@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int main() {
+    int score;
+    char ch;
+
+    printf("enter score : ");
+
+    // ตรวจสอบว่า input เป็นตัวเลขหรือไม่
+    if (scanf("%d", &score) != 1) {
+        printf("please enter number only.\n");
+        return 0;
+    }
+
+    // ตรวจสอบช่วงคะแนนแล้วแสดงผลลัพธ์
+    if (score < 50)
+        printf("F !\n");
+    else if (score < 55)
+        printf("D !\n");
+    else if (score < 60)
+        printf("D+ !\n");
+    else if (score < 65)
+        printf("C !\n");
+    else if (score < 70)
+        printf("C+ !\n");
+    else if (score < 75)
+        printf("B !\n");
+    else if (score < 80)
+        printf("B+ !\n");
+    else
+        printf("A !\n");
+
+    return 0;
+}
