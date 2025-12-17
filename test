@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+
+int main(void)
+{
+    pid_t forkresult;
+
+    printf("%d: I am the parent. Remember my number!\n", getpid());
+    printf("%d: I am now going to fork ... \n", getpid());
+
+    forkresult = fork();
+
+    if (forkresult < 0) {           // fork error
+        perror("fork");
+        return 1;
+    }
+
+    if (forkresult != 0) {          // parent
+        printf("%d: My child's pid is %d\n", getpid(), forkresult);
+        wait(NULL);                 // optional but recommended
+    } else {                        // child
+        printf("%d: Hi! I am the child.\n", getpid());
+    }
+
+    printf("%d: like father like son.\n", getpid());
+    return 0;
+}
+
+#include <stdio.h>
+#include <unistd.h>     // getpid, getppid, fork, sleep
+#include <sys/types.h>  // pid_t
+
+int main(void)
+{
+    pid_t pid;
+
+    printf("I'm the original process with PID %d and PPID %d.\n",
+           getpid(), getppid());
+
+    pid = fork();  // Duplicate. Child and parent continue from here
+
+    if (pid != 0) { // Parent (pid is child's PID)
+        printf("I'm the parent with PID %d and PPID %d.\n",
+               getpid(), getppid());
+        printf("My child's PID is %d\n", pid);
+    } else {        // Child (pid == 0)
+        sleep(4);   // make sure that the parent terminates first
+        printf("I'm the child with PID %d and PPID %d.\n",
+               getpid(), getppid());
+    }
+
+    printf("PID %d terminates.\n", getpid());
+    return 0;
+}
+
+
